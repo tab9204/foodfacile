@@ -2,12 +2,12 @@
 
 var googleMapsDirections;//google maps directions url
 var responseErrors = {// text responses for each map api response error
-  INVALID_REQUEST: "This request was invalid.",
+  INVALID_REQUEST: "This request was invalid. Try again",
   OVER_QUERY_LIMIT: "App has reached max its request quota.",
   NOT_FOUND: "The referenced location was not found in the Places database.",
-  REQUEST_DENIED: "The webpage is not allowed to use the PlacesService.",
-  UNKNOWN_ERROR: "The PlacesService request could not be processed due to a server error. The request may succeed if you try again.",
-  ZERO_RESULTS: "No result was found for this request."
+  REQUEST_DENIED: "The webpage is not allowed to use the PlacesService API.",
+  UNKNOWN_ERROR: "This request could not be processed due to a server error. The request may succeed if you try again.",
+  ZERO_RESULTS: "No open restraunts were found."
 };
 
 //initiates a search for nearby restaurants

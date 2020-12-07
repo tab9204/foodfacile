@@ -1,6 +1,6 @@
-- Add more error handing
-
 - Directions origin location seems to be off sometimes
+
+-remove navigation with browser/device buttons
 
 - Add secondary animations to the app
   - animate loading screen
@@ -10,6 +10,5 @@
 
 - set up manifest file
 
-- Lock down api key before pushing to production
 
 https://www.google.com/maps/dir/?api=1&origin=(47.6727543, -122.1287193)&destination="Food"&destination_place_id=ChIJo25v_a1ykFQR13O3VWX6GXw

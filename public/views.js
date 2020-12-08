@@ -130,6 +130,9 @@ var error = {//screen showing thrown errors
 }
 
 var loading ={//screen to show while requests are loaded
+  oncreate: ()=>{
+    history.replaceState(null, "main", "#!/main");//update browers history to skip the loading screen if the back button is used
+  },
   view: () =>{
     return m("loadingScreen",[
       m("viewContent",[

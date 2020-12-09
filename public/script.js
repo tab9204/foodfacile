@@ -2,7 +2,7 @@ import {main, food, loading, error} from './views.js';
 
 window.onload = () =>{
   //set up the service worker once the page loads
-  //if ('serviceWorker' in navigator) {navigator.serviceWorker.register('service-worker.js');}
+  if ('serviceWorker' in navigator) {navigator.serviceWorker.register('service-worker.js');}
 
   window.location = "#!/main";//start the app on the main screen
 

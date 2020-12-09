@@ -1,11 +1,13 @@
 var cacheName = 'offlineCache-v1';
 var contentToCache = [
-  '/index.html',
+  '/offline.html',
+  '/manifest.json',
   '/dependencies/jquery-3.5.1.min.js',
   '/dependencies/maps-api.js',
   '/dependencies/mithril.js',
   '/dependencies/rangeslider.min.js',
   '/dependencies/rangeslider.css',
+  '/dependencies/quicksand.woff2',
   '/public/googleMaps.js',
   '/public/script.js',
   '/public/views.js',
@@ -29,6 +31,8 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then(function(response) {//respond with cache first
       return response || fetch(event.request);
+    }).catch(function(){
+      return caches.match('/offline.html');
     })
   );
 });

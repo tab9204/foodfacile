@@ -8,6 +8,7 @@
       "type": "image/jpg"
     }
   ],
+  "background_color": "#f06e6e",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait"

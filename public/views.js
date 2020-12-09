@@ -1,33 +1,12 @@
 /*****app views****/
+import * as viewData from './data.js';
 
-import {initFoodSearch} from './googleMaps.js';
-
-//Food screen variables
-var foodName;
-var foodAddress;
-var foodPhone;
-var foodWebsite;
-var foodDirections;
-var foodPicture;
-
-//main screen variables
-var searchRanges =[//the range of possible serach radius and the one screen text for those values
-  {radiusInMeters: "600", textToDisplay: "< 1 mile"},
-  {radiusInMeters: "3219", textToDisplay: "2 miles"},
-  {radiusInMeters: "8047", textToDisplay: "5 miles"},
-  {radiusInMeters: "50000", textToDisplay: "> 10 miles"}
-];
-var searchText;//text to display above the search radius slider
-var searchRadius;//radius to use in the food search
-
-//error screen variables
-var errorThrown = "";
 
 /**Compenents**/
 var header = {//default header
   view:()=>{
     return m("header",[
-      m("div.centerText","What Food?")
+      m("div.centerText","Foodine")
     ])
   }
 }
@@ -36,53 +15,24 @@ var headerBack = {//header with back button
   view:()=>{
     return m("header",[
       m("img.backBtn.scaleAnimation", {src: "/public/back.png", onclick: ()=>{window.location = "#!/main"}}),
-      m("div.centerText","What Food?")
+      m("div.centerText","Foodine")
     ])
   }
 }
 
 var main = {//main screen
-  oninit: ()=>{
-    searchText = searchRanges[0].textToDisplay;//initalize the search radius text
-    searchRadius = searchRanges[0].radiusInMeters;
-  },
-  oncreate: ()=>{
-    //add options to the slider
-    $('input.slider').rangeslider({
-      polyfill: false,
-      onSlide: function(position, value) {
-        searchText = searchRanges[value].textToDisplay;
-        searchRadius = searchRanges[value].radiusInMeters;
-        m.redraw();
-      }
-    })
-  },
+  oncreate: viewData.initSlider,//initalize the slider on component creation
   view: ()=>{
     return m("mainScreen", [
       m(header),
       m("viewContent", [
-        m("div.contentContainer.font_size_1_3", "Select a serach radius size and then hit the Find Something button to find a nearby restaurant"),
+        m("div.contentContainer.font_size_1_3", "Select a search radius then hit the button below to explore nearby places to grab some food."),
         m("div.contentContainer.centerText", [
-          m("div.sliderValue.font_size_1_3", searchText),
-          m("input.slider",{type: "range", min: 0, max: 3, value: 0}),
+          m("div.sliderValue.font_size_1_3", viewData.slider_display_text),
+          m("input.slider",{type: "range", min: 0, max: 3, value: viewData.slider_value}),//prevent slider value from using default value on redraw
         ]),
         m("div.contentContainer",[
-          m("div.button.center.font_size_1_5",{onclick: ()=>{
-            window.location = "#!/loading";//show the loading screen while the requests are being made
-            initFoodSearch(searchRadius).then((details)=>{
-               foodName = details.name;
-               foodAddress = details.address;
-               foodPhone = details.phone;
-               foodWebsite = details.website;
-               foodDirections = details.directions;
-               foodPicture = details.picture;
-               window.location = "#!/food";//update the url to show the food screen
-            })
-            .catch((error)=>{//update and show error screen
-              errorThrown = error;
-              window.location = "#!/error";
-            });
-          }},"Find Something")
+          m("div.button.center.font_size_1_5",{onclick: () =>{viewData.initFoodSearch(viewData.search_radius)} },"Find Food")
         ])
       ])
     ])
@@ -102,17 +52,17 @@ var food = {//selected restaurant screen
       m(headerBack),
       m("viewContent",[
         m("div.imgContainer",[
-          m("img", {src: foodPicture, onload:()=>{$( ".imgContainer img" ).fadeIn(500)}})//after the image has loaded fade it in
+          m("img", {src: viewData.food_details.picture, onload:()=>{$( ".imgContainer img" ).fadeIn(500)}})//after the image has loaded fade it in
         ]),
         m("div.contentContainer.textContent", [
-          m("div.font_size_1_3",foodName),
-          m("div",foodAddress),
-          m("div",foodPhone),
+          m("div.font_size_1_3",viewData.food_details.name),
+          m("div",viewData.food_details.address),
+          m("div",viewData.food_details.phone),
         ]),
         m("div.contentContainer.font_size_1_5.center.buttonContent",[
           m("div",[
-            m("a.button", {href: foodWebsite, target: "_blank"},"Website"),
-            m("a.button", {href: foodDirections, target: "_blank", style: {margin: "0 0 0 10px"}},"Directions")
+            m("a.button", {href: viewData.food_details.website, target: "_blank"},"Website"),
+            m("a.button", {href: viewData.food_details.directions, target: "_blank", style: {margin: "0 0 0 10px"}},"Directions")
           ])
         ])
       ])
@@ -125,7 +75,7 @@ var error = {//screen showing thrown errors
     return m("errorScreen",[
       m(headerBack),
       m("viewContent",[
-        m("div.contentContainer.centerText.font_size_1_5",errorThrown)
+        m("div.contentContainer.centerText.font_size_1_5",viewData.error_Thrown)
       ])
     ])
   }

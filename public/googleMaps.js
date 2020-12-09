@@ -1,37 +1,5 @@
 /**********Google maps related functions************/
 
-var googleMapsDirections;//google maps directions url
-var responseErrors = {// text responses for each map api response error
-  INVALID_REQUEST: "This request was invalid. Try again",
-  OVER_QUERY_LIMIT: "App has reached max its request quota.",
-  NOT_FOUND: "The referenced location was not found in the Places database.",
-  REQUEST_DENIED: "The webpage is not allowed to use the PlacesService API.",
-  UNKNOWN_ERROR: "This request could not be processed due to a server error. Try again.",
-  ZERO_RESULTS: "No open restraunts were found."
-};
-
-//initiates a search for nearby restaurants
-//serachRadius => radius in meters to serach
-function initFoodSearch(searchRadius){
-  return new Promise((resolve,reject) =>{
-    googleMapsDirections = "https://www.google.com/maps/dir/?api=1&";//start building the google maps url
-    getUserLocation()//get the users location
-    .then((location) =>{
-      googleMapsDirections += "origin="  + location + "&";//add user location to the url
-      return searchForNearbyFood(location,searchRadius);//search for nearby restaurants with user location
-    })
-    .then((placeId) =>{
-      googleMapsDirections += "destination='Food'&destination_place_id="+ placeId;//add restraunt destination to url
-      return getFoodDetails(placeId);//get details on the restaurant
-    })
-    .then((foodDetails) =>{
-       resolve(foodDetails);//return the restaurant details
-    })
-    .catch((error)=>{//return the error thrown
-      reject(error);
-    });
-  })
-}
 
 //searchs nearby restraunts and returns a randomly selected restraunt ID
 //location => current location of the user
@@ -56,7 +24,7 @@ function searchForNearbyFood(location,radius){
         resolve(selected.place_id);//return the restaurants ID
       }
       else{
-        reject(responseErrors[status]);//return the response error
+        reject(status);//return the response error
       }
     })
   })
@@ -73,19 +41,10 @@ function getFoodDetails(placeId){
 
     service.getDetails(request, (results, status)=>{//get the details of the restaurant
       if(status == "OK"){
-        var image = results.photos !== undefined ? results.photos[0].getUrl() : "/public/logo.png";//if no image is returned use a default image
-        var foodDetails = {
-          name: results.name,
-          address: results.formatted_address,
-          phone: results.formatted_phone_number,
-          website: results.website,
-          directions: googleMapsDirections,
-          picture: image
-        }
-        resolve(foodDetails);//return the details
+        resolve(results);//return the details
       }
       else{
-        reject(responseErrors[status]);//return the response error
+        reject(status);//return the response error
       }
     })
   })
@@ -104,14 +63,14 @@ function getUserLocation(){
         resolve(position);
 
       },(error)=>{//there was an error finding the user's location
-        reject("Denied access to user location");
+        reject("DENIED_GEOLOCATION");
       },{enableHighAccuracy: true})
     }
     else{//api is not supported
-      reject("Browswer does not support the geolocation api");
+      reject("UNSUPPORTED_BROWSER");
     }
   })
 }
 
 
-export{initFoodSearch};
+export{searchForNearbyFood, getFoodDetails, getUserLocation};

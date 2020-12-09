@@ -18,6 +18,7 @@ var searchRanges =[//the range of possible serach radius and the one screen text
   {radiusInMeters: "50000", textToDisplay: "> 10 miles"}
 ];
 var searchText;//text to display above the search radius slider
+var searchRadius;//radius to use in the food search
 
 //error screen variables
 var errorThrown = "";
@@ -50,6 +51,7 @@ var main = {//main screen
       polyfill: false,
       onSlide: function(position, value) {
         searchText = searchRanges[value].textToDisplay;
+        searchRadius = searchRanges[value].radiusInMeters;
         m.redraw();
       }
     })
@@ -66,7 +68,6 @@ var main = {//main screen
         m("div.contentContainer",[
           m("div.button.center.font_size_1_5",{onclick: ()=>{
             window.location = "#!/loading";//show the loading screen while the requests are being made
-            var searchRadius = searchRanges[$("input.slider").val()].radiusInMeters;//use slider value as search radius
             initFoodSearch(searchRadius).then((details)=>{
                foodName = details.name;
                foodAddress = details.address;

@@ -1,6 +1,17 @@
 var cacheName = 'offlineCache-v1';
 var contentToCache = [
   '/index.html',
+  '/dependencies/jquery-3.5.1.min.js',
+  '/dependencies/maps-api.js',
+  '/dependencies/mithril.js',
+  '/dependencies/rangeslider.min.js',
+  '/dependencies/rangeslider.css',
+  '/public/googleMaps.js',
+  '/public/script.js',
+  '/public/views.js',
+  '/public/styles.css',
+  '/public/back.png',
+  '/public/logo.png',
 ];
 
 self.addEventListener('install', (event) => {
@@ -16,8 +27,8 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', (event) => {
   var url = event.request;
   event.respondWith(
-    fetch(event.request).catch(function() {
-      return caches.match(event.request);
+    caches.match(event.request).then(function(response) {//respond with cache first
+      return response || fetch(event.request);
     })
   );
 });

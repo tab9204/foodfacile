@@ -6,7 +6,7 @@ var responseErrors = {// text responses for each map api response error
   OVER_QUERY_LIMIT: "App has reached max its request quota.",
   NOT_FOUND: "The referenced location was not found in the Places database.",
   REQUEST_DENIED: "The webpage is not allowed to use the PlacesService API.",
-  UNKNOWN_ERROR: "This request could not be processed due to a server error. The request may succeed if you try again.",
+  UNKNOWN_ERROR: "This request could not be processed due to a server error. Try again.",
   ZERO_RESULTS: "No open restraunts were found."
 };
 

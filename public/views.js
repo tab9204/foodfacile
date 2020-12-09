@@ -44,6 +44,7 @@ var headerBack = {//header with back button
 var main = {//main screen
   oninit: ()=>{
     searchText = searchRanges[0].textToDisplay;//initalize the search radius text
+    searchRadius = searchRanges[0].radiusInMeters;
   },
   oncreate: ()=>{
     //add options to the slider

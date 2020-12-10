@@ -1,4 +1,4 @@
-var cacheName = 'offlineCache-v1';
+var cacheName = 'offlineCache-v3';
 var contentToCache = [
   '/offline.html',
   '/manifest.json',
@@ -16,9 +16,8 @@ var contentToCache = [
   '/public/logo.png',
 ];
 
-caches.delete(cacheName);
 
-/*
+
 self.addEventListener('install', (event) => {
   console.log('Service Worker Installed');
   event.waitUntil(
@@ -27,6 +26,18 @@ self.addEventListener('install', (event) => {
       return cache.addAll(contentToCache);
     })
   );
+});
+
+self.addEventListener("activate", function(event) {//clean up old caches
+  event.waitUntil(
+   caches.keys().then((keyList) => {
+     return Promise.all(keyList.map((key) => {
+       if(key !== cacheName) {
+         return caches.delete(key);
+       }
+     }));
+   })
+ );
 });
 
 self.addEventListener('fetch', (event) => {
@@ -38,4 +49,4 @@ self.addEventListener('fetch', (event) => {
       return caches.match('/offline.html');
     })
   );
-});*/
+});

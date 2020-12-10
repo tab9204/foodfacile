@@ -16,6 +16,9 @@ var contentToCache = [
   '/public/logo.png',
 ];
 
+caches.delete(cacheName);
+
+/*
 self.addEventListener('install', (event) => {
   console.log('Service Worker Installed');
   event.waitUntil(
@@ -35,4 +38,4 @@ self.addEventListener('fetch', (event) => {
       return caches.match('/offline.html');
     })
   );
-});
+});*/

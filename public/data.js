@@ -36,6 +36,8 @@ var response_errors = {// text responses for each potential error
 };
 var error_Thrown = "";//error to show on the error screen
 
+var animation_ready = false;//flags if a page is ready to animate
+
 //initalizes the search radius slider
 function initSlider(){
   //add options to the slider

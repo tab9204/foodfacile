@@ -41,11 +41,11 @@ var main = {//main screen
 
 var food = {//selected restaurant screen
   oncreate: ()=>{//animate the nodes after the are created
-    $( ".textContent" ).fadeIn(1000,()=>{//fade in text content
-      $( ".buttonContent" ).fadeIn(500,()=>{//buttons
-        $( "foodScreen .backBtn" ).fadeIn(100);//fade in back button
+      $( ".textContent" ).fadeIn(1000,()=>{//fade in text content
+        $( ".buttonContent" ).fadeIn(500,()=>{//buttons
+          $( "foodScreen .backBtn" ).fadeIn(100);//fade in back button
+        });
       });
-    });
   },
   view: () =>{
     return m("foodScreen",[

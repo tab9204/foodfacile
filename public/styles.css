@@ -1,13 +1,15 @@
 body{margin:0px; font-family: 'Quicksand', sans-serif; overflow: hidden;}
-a{color: black; text-decoration: none;}
+a{display: none;}
+a[href]{color: black; text-decoration: none; display: initial !important;}
 .opacity0{opacity: 0;}
 .center{margin: 0px auto;}
 .centerText{text-align: center;}
-.button{background: #f06e6e; padding: 5px; font-size: 1em; width: fit-content; border: 1px solid black; cursor: pointer;}
 .flex_center{align-items: center;}
 .font_size_1_1{font-size: 1.1em;}
 .font_size_1_3{font-size: 1.3em;}
 .font_size_1_5{font-size: 1.5em;}
+
+.button{background: #f06e6e; padding: 5px; width: fit-content; border: 1px solid black; cursor: pointer;}
 
 /*animations*/
 @keyframes scaleAnimation {
@@ -33,7 +35,7 @@ loadingScreen viewContent div img{width: 100%;}
 
 foodScreen viewContent{ justify-content: start;}
 foodScreen .backBtn{display: none;}
-foodScreen .imgContainer{width: 100%; height: 35vh; overflow: hidden; background: #e6e6e6;}
+foodScreen .imgContainer{width: 100%; height: 40vh; overflow: hidden; background: #e6e6e6;}
 foodScreen .imgContainer img{width: 100%; display: none;}
 foodScreen .textContent{display: none;}
 foodScreen .buttonContent{display: none;}

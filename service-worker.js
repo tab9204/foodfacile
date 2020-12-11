@@ -1,9 +1,8 @@
-var cacheName = 'offlineCache-v3';
+var cacheName = 'offlineCache-v4';
 var contentToCache = [
   '/offline.html',
   '/manifest.json',
   '/dependencies/jquery-3.5.1.min.js',
-  '/dependencies/maps-api.js',
   '/dependencies/mithril.js',
   '/dependencies/rangeslider.min.js',
   '/dependencies/rangeslider.css',

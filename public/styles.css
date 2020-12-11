@@ -38,7 +38,7 @@ loadingScreen viewContent div img{width: 100%;}
 foodScreen viewContent{ justify-content: start;}
 foodScreen .backBtn{display: none;}
 foodScreen .imgContainer{width: 100%; height: 40vh; overflow: hidden; background: #e6e6e6;}
-foodScreen .imgContainer img{width: 100%; display: none;}
+foodScreen .imgContainer img{width: 100%; height: 100%; display: none; object-fit: cover;}
 foodScreen .textContent{display: none;}
 foodScreen .buttonContent{display: none;}
 foodScreen viewContent .contentContainer div{margin: 7px;}

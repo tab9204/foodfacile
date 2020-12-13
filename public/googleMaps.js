@@ -15,13 +15,14 @@ function searchForNearbyFood(location,radius){
 
     var service = new google.maps.places.PlacesService($(".mapContent").get(0));//google maps service used to run search queries
 
-    service.nearbySearch(request, (results, status)=>{//run a nearby search with the request parameters
+    service.nearbySearch(request, (results, status, next_page_token)=>{//run a nearby search with the request parameters
       if(status == "OK"){
         //randomly pick a restaurant from the returned list
         var max = results.length;
         var randomPick = Math.floor(Math.random() * Math.floor(max));
         var selected = results[randomPick];
         resolve(selected.place_id);//return the restaurants ID
+        console.log(results);
       }
       else{
         reject(status);//return the response error
@@ -56,7 +57,6 @@ function getUserLocation(){
     //check if the geolocation api is supported by the browswer
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition((position)=>{//ask user for their current location
-        console.log(position.coords.latitude + " : " + position.coords.longitude);
         //location was found
         var position = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
 
@@ -72,5 +72,10 @@ function getUserLocation(){
   })
 }
 
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+}
 
 export{searchForNearbyFood, getFoodDetails, getUserLocation};

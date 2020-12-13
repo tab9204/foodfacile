@@ -13,16 +13,16 @@ var food_details = {//details of the selected restaurant to display on the food 
   picture: null
 }
 
-var slider_Values =[//the string values that coorespond to each point on the slider
+var radius_slider =[//the values and text associated with the search radius slider
   {radiusInMeters: "600", textToDisplay: "< 1 mile"},
   {radiusInMeters: "3219", textToDisplay: "2 miles"},
   {radiusInMeters: "8047", textToDisplay: "5 miles"},
   {radiusInMeters: "50000", textToDisplay: "> 10 miles"}
 ];
 
-var slider_display_text = slider_Values[0].textToDisplay;//text to display above the search slider
-var slider_value = 0;//the value of the slider html input
-var search_radius = slider_Values[0].radiusInMeters;//radius to use in the food search
+var radius_slider_display_text = radius_slider[0].textToDisplay;//text to display above the radius slider
+var radius_slider_value = 0;//the value of the slider html input
+var search_radius = radius_slider[0].radiusInMeters;//radius to use in the food search
 
 var response_errors = {// text responses for each potential error
   INVALID_REQUEST: "This request was invalid. Try again",
@@ -30,7 +30,7 @@ var response_errors = {// text responses for each potential error
   NOT_FOUND: "The referenced location was not found in the Places database.",
   REQUEST_DENIED: "The webpage is not allowed to use the PlacesService API.",
   UNKNOWN_ERROR: "This request could not be processed due to a server error. Try again.",
-  ZERO_RESULTS: "No open restraunts were found.",
+  ZERO_RESULTS: "No restraunts were found at this time. Try again",
   UNSUPPORTED_BROWSER: "Browser does not support the geolocation api",
   DENIED_GEOLOCATION: "Denied access to user location"
 };
@@ -39,14 +39,14 @@ var error_Thrown = "";//error to show on the error screen
 var animation_ready = false;//flags if a page is ready to animate
 
 //initalizes the search radius slider
-function initSlider(){
-  //add options to the slider
-  $('input.slider').rangeslider({
+function initSliders(){
+  //add options to the sliders
+  $('input.radiusSlider').rangeslider({
     polyfill: false,
     onSlide: function(position, value) {
-      slider_display_text = slider_Values[value].textToDisplay;
-      search_radius = slider_Values[value].radiusInMeters;
-      slider_value = value;
+      radius_slider_display_text = radius_slider[value].textToDisplay;
+      search_radius = radius_slider[value].radiusInMeters;
+      radius_slider_value = value;
       m.redraw();//need to manually redraw the view
     }
   })
@@ -54,6 +54,7 @@ function initSlider(){
 
 //initiates a search for nearby restaurants
 //serachRadius => radius in meters to serach
+//priceLevel => price amount to limit search to
 function initFoodSearch(searchRadius){
   window.location = "#!/loading";//show the loading screen while the requests are being made
   google_maps_directions = "https://www.google.com/maps/dir/?api=1&";//start building the google maps url
@@ -84,4 +85,4 @@ function initFoodSearch(searchRadius){
   });
 }
 
-export{initSlider, slider_display_text, slider_value, search_radius, initFoodSearch, food_details, error_Thrown};
+export{initSliders, radius_slider_display_text, radius_slider_value, search_radius, initFoodSearch, food_details, error_Thrown};

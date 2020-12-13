@@ -21,15 +21,15 @@ var headerBack = {//header with back button
 }
 
 var main = {//main screen
-  oncreate: viewData.initSlider,//initalize the slider on component creation
+  oncreate: viewData.initSliders,//initalize the sliders on component creation
   view: ()=>{
     return m("mainScreen", [
       m(header),
       m("viewContent", [
-        m("div.contentContainer.font_size_1_3", "Select a search radius then hit the button below to explore nearby places to grab some food."),
-        m("div.contentContainer.centerText", [
-          m("div.sliderValue.font_size_1_3", viewData.slider_display_text),
-          m("input.slider",{type: "range", min: 0, max: 3, value: viewData.slider_value}),//prevent slider value from using default value on redraw
+        m("div.contentContainer.font_size_1_3", "No more crippling indecision!"),
+        m("div.contentContainer", [
+          m("div.sliderText.centerText.font_size_1_3", viewData.radius_slider_display_text),
+          m("input.radiusSlider",{type: "range", min: 0, max: 3, value: viewData.radius_slider_value}),//prevent slider value from using default value on redraw
         ]),
         m("div.contentContainer",[
           m("div.button.center.font_size_1_5",{onclick: () =>{viewData.initFoodSearch(viewData.search_radius)} },"Find Food")
@@ -52,7 +52,7 @@ var food = {//selected restaurant screen
       m(headerBack),
       m("viewContent",[
         m("div.imgContainer",[
-          m("img", {src: viewData.food_details.picture, onload:()=>{$( ".imgContainer img" ).fadeIn(500)}})//after the image has loaded fade it in
+          m("img", {src: viewData.food_details.picture, alt: "restaurant image from google maps", onload:()=>{$( ".imgContainer img" ).fadeIn(500)}})//after the image has loaded fade it in
         ]),
         m("div.contentContainer.textContent", [
           m("div.font_size_1_3",viewData.food_details.name),

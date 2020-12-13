@@ -25,10 +25,10 @@ a[href]{color: black; text-decoration: none; display: initial !important;}
   header{background:#f06e6e; font-size: 2em; padding: 5px;}
     header .backBtn{position: absolute; width: 40px;}
   viewContent{max-width:600px; height:100%; position:relative; left:50%; transform:translate(-50%); display:flex; flex-direction: column;}
-    viewContent .contentContainer{padding: 10px;}
 
 mainScreen viewContent{ justify-content: space-around;}
-  .sliderValue{margin-bottom: 15px;}
+mainScreen viewContent .contentContainer{padding: 0 10px 0 10px;}
+  .sliderText{margin: 15px 0 15px 0;}
 
 
 loadingScreen viewContent{background:#f06e6e;}
@@ -42,6 +42,7 @@ foodScreen .imgContainer img{width: 100%; height: 100%; display: none; object-fi
 foodScreen .textContent{display: none;}
 foodScreen .buttonContent{display: none;}
 foodScreen viewContent .contentContainer div{margin: 7px;}
+foodScreen viewContent .contentContainer{padding: 10px;}
 
 errorScreen viewContent{ justify-content: center;}
 

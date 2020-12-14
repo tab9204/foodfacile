@@ -26,7 +26,7 @@ var main = {//main screen
     return m("mainScreen", [
       m(header),
       m("viewContent", [
-        m("div.contentContainer.font_size_1_3", "No more crippling indecision!"),
+        m("div.contentContainer.font_size_1_3", "No more crippling indecision! Select a max travel distance and have a restaurant picked for you!"),
         m("div.contentContainer", [
           m("div.sliderText.centerText.font_size_1_3", viewData.radius_slider_display_text),
           m("input.radiusSlider",{type: "range", min: 0, max: 3, value: viewData.radius_slider_value}),//prevent slider value from using default value on redraw

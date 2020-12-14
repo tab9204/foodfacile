@@ -13,19 +13,29 @@ function searchForNearbyFood(location,radius){
       type: ['restaurant']
     };
 
+    var next_page_threshold = 6;//used to determine if the results returned will come from the current page or the next page
+
     var service = new google.maps.places.PlacesService($(".mapContent").get(0));//google maps service used to run search queries
 
     service.nearbySearch(request, (results, status, next_page_token)=>{//run a nearby search with the request parameters
-      if(status == "OK"){
-        //randomly pick a restaurant from the returned list
-        var max = results.length;
-        var randomPick = Math.floor(Math.random() * Math.floor(max));
-        var selected = results[randomPick];
-        resolve(selected.place_id);//return the restaurants ID
-        console.log(results);
+      var diceResult = rollDice(1,10);//roll the dice to see if we are selecting the next page of results
+      console.log(results);
+      if(next_page_token.hasNextPage && diceResult > next_page_threshold){//get the the next page of results if there is one and the dice roll is above the threshold
+        setTimeout(() => {
+          next_page_token.nextPage();
+        },2500);//the token is not immediately active so wait briefly before trying to use it
       }
-      else{
-        reject(status);//return the response error
+      else{//use the current page of results
+        if(status == "OK"){
+          //randomly pick a restaurant from the returned list
+          var max = results.length;
+          var randomPick = Math.floor(Math.random() * Math.floor(max));
+          var selected = results[randomPick];
+          resolve(selected.place_id);//return the restaurants ID
+        }
+        else{
+          reject(status);//return the response error
+        }
       }
     })
   })
@@ -72,7 +82,8 @@ function getUserLocation(){
   })
 }
 
-function getRandomIntInclusive(min, max) {
+//picks a number basd on a range provided
+function rollDice(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive

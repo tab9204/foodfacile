@@ -1,4 +1,4 @@
-var cacheName = 'offlineCache-v10';
+var cacheName = 'offlineCache-v11';
 var contentToCache = [
   '/offline.html',
   '/manifest.json',
@@ -9,7 +9,6 @@ var contentToCache = [
   '/public/googleMaps.js',
   '/public/script.js',
   '/public/views.js',
-  '/public/styles.css',
   '/public/back.png',
   '/public/logo.png',
 ];

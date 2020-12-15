@@ -6,7 +6,7 @@ window.onload = () =>{
 
   window.location = "#!/main";//start the app on the main screen
 
-  var root = $("#appRoot").get(0)
+  var root = $("#appRoot").get(0);
 
   // Try it out! This is just to
   // help get things started.

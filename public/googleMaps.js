@@ -15,7 +15,7 @@ function searchForNearbyFood(location,radius){
 
     var next_page_threshold = 6;//used to determine if the results returned will come from the current page or the next page
 
-    var service = new google.maps.places.PlacesService($(".mapContent").get(0));//google maps service used to run search queries
+    var service = new google.maps.places.PlacesService(document.getElementsByClassName("mapContent")[0]);//google maps service used to run search queries
 
     service.nearbySearch(request, (results, status, next_page_token)=>{//run a nearby search with the request parameters
       var diceResult = rollDice(1,10);//roll the dice to see if we are selecting the next page of results
@@ -23,7 +23,7 @@ function searchForNearbyFood(location,radius){
       if(next_page_token.hasNextPage && diceResult > next_page_threshold){//get the the next page of results if there is one and the dice roll is above the threshold
         setTimeout(() => {
           next_page_token.nextPage();
-        },2500);//the token is not immediately active so wait briefly before trying to use it
+        },2000);//the token is not immediately active so wait briefly before trying to use it
       }
       else{//use the current page of results
         if(status == "OK"){
@@ -48,7 +48,7 @@ function getFoodDetails(placeId){
       fields: ['name', 'formatted_phone_number', 'formatted_address', 'photos', 'website']
     };
 
-    var service = new google.maps.places.PlacesService($(".mapContent").get(0));
+    var service = new google.maps.places.PlacesService(document.getElementsByClassName("mapContent")[0]);
 
     service.getDetails(request, (results, status)=>{//get the details of the restaurant
       if(status == "OK"){

@@ -32,11 +32,9 @@ var response_errors = {// text responses for each potential error
   UNKNOWN_ERROR: "This request could not be processed due to a server error. Try again.",
   ZERO_RESULTS: "No restraunts were found at this time. Try again",
   UNSUPPORTED_BROWSER: "Browser does not support the geolocation api",
-  DENIED_GEOLOCATION: "Denied access to user location"
+  DENIED_GEOLOCATION: "Denied access to user location",
 };
 var error_Thrown = "";//error to show on the error screen
-
-var animation_ready = false;//flags if a page is ready to animate
 
 //initalizes the search radius slider
 function initSliders(){

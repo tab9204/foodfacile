@@ -6,19 +6,12 @@ import * as viewData from './data.js';
 var header = {//default header
   view:()=>{
     return m("header",[
-      m("div.centerText","Foodine")
-    ])
-  }
-}
-
-var headerBack = {//header with back button
-  view:()=>{
-    return m("header",[
       m("img.backBtn.scaleAnimation", {src: "/public/back.png", onclick: ()=>{window.location = "#!/main"}}),
       m("div.centerText","Foodine")
     ])
   }
 }
+
 
 var main = {//main screen
   oncreate: viewData.initSliders,//initalize the sliders on component creation
@@ -41,18 +34,18 @@ var main = {//main screen
 
 var food = {//selected restaurant screen
   oncreate: ()=>{//animate the nodes after the are created
-      $( ".textContent" ).fadeIn(1000,()=>{//fade in text content
-        $( ".buttonContent" ).fadeIn(500,()=>{//buttons
-          $( "foodScreen .backBtn" ).fadeIn(100);//fade in back button
+      $( ".textContent").fadeIn(1000,()=>{//fade in text content
+        $( ".buttonContent").fadeIn(500,()=>{//buttons
+          $("foodScreen .backBtn").fadeIn(100);//fade in back button
         });
       });
   },
   view: () =>{
     return m("foodScreen",[
-      m(headerBack),
+      m(header),
       m("viewContent",[
         m("div.imgContainer",[
-          m("img", {src: viewData.food_details.picture, alt: "restaurant image from google maps", onload:()=>{$( ".imgContainer img" ).fadeIn(500)}})//after the image has loaded fade it in
+          m("img", {src: viewData.food_details.picture, alt: "restaurant image from google maps", onload:()=>{$(".imgContainer img").fadeIn(500)}})//after the image has loaded fade it in
         ]),
         m("div.contentContainer.textContent", [
           m("div.font_size_1_3",viewData.food_details.name),
@@ -71,9 +64,12 @@ var food = {//selected restaurant screen
 }
 
 var error = {//screen showing thrown errors
+  oncreate: ()=>{//animate the nodes after the are created
+    $( "errorScreen .backBtn").fadeIn(100);//fade in back button
+  },
   view: () =>{
     return m("errorScreen",[
-      m(headerBack),
+      m(header),
       m("viewContent",[
         m("div.contentContainer.centerText.font_size_1_5",viewData.error_Thrown)
       ])

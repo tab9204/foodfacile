@@ -14,10 +14,10 @@ var food_details = {//details of the selected restaurant to display on the food 
 }
 
 var radius_slider =[//the values and text associated with the search radius slider
-  {radiusInMeters: "600", textToDisplay: "< 1 mile"},
+  {radiusInMeters: "1610", textToDisplay: "1 mile"},
   {radiusInMeters: "3219", textToDisplay: "2 miles"},
   {radiusInMeters: "8047", textToDisplay: "5 miles"},
-  {radiusInMeters: "50000", textToDisplay: "> 10 miles"}
+  {radiusInMeters: "16094", textToDisplay: "10 miles"}
 ];
 
 var radius_slider_display_text = radius_slider[0].textToDisplay;//text to display above the radius slider

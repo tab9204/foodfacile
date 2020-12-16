@@ -7,7 +7,7 @@ var header = {//default header
   view:()=>{
     return m("header",[
       m("img.backBtn.scaleAnimation", {src: "/public/back.png", onclick: ()=>{window.location = "#!/main"}}),
-      m("div.centerText","Foodine")
+      m("div.centerText","FoodFacile")
     ])
   }
 }
@@ -25,7 +25,7 @@ var main = {//main screen
           m("input.radiusSlider",{type: "range", min: 0, max: 3, value: viewData.radius_slider_value}),//prevent slider value from using default value on redraw
         ]),
         m("div.contentContainer",[
-          m("div.button.center.font_size_1_5",{onclick: () =>{viewData.initFoodSearch(viewData.search_radius)} },"Find Food")
+          m("div.button.center.font_size_1_7",{onclick: () =>{viewData.initFoodSearch(viewData.search_radius)} },"Find Food")
         ])
       ])
     ])

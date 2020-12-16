@@ -13,7 +13,7 @@ function searchForNearbyFood(location,radius){
       type: ['restaurant']
     };
 
-    var next_page_threshold = 6;//used to determine if the results returned will come from the current page or the next page
+    var next_page_threshold = 5;//used to determine if the results returned will come from the current page or the next page
 
     var service = new google.maps.places.PlacesService(document.getElementsByClassName("mapContent")[0]);//google maps service used to run search queries
 

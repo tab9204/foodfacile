@@ -6,7 +6,7 @@ import * as viewData from './data.js';
 var header = {//default header
   view:()=>{
     return m("header",[
-      m("img.backBtn.scaleAnimation", {src: "/public/back.png", onclick: ()=>{window.location = "#!/main"}}),
+      m("img.backBtn.scaleAnimation", {alt: "navigate back",src: "/public/back.png", onclick: ()=>{window.location = "#!/main"}}),
       m("div.centerText","FoodFacile")
     ])
   }
@@ -19,10 +19,10 @@ var main = {//main screen
     return m("mainScreen", [
       m(header),
       m("viewContent", [
-        m("div.contentContainer.font_size_1_3", "No more crippling indecision! Select a max travel distance and have a restaurant picked for you!"),
+        m("div.contentContainer.font_size_1_3", "No more crippling indecision! Select a max travel distance and have a nearby restaurant picked for you!"),
         m("div.contentContainer", [
           m("div.sliderText.centerText.font_size_1_3", viewData.radius_slider_display_text),
-          m("input.radiusSlider",{type: "range", min: 0, max: 3, value: viewData.radius_slider_value}),//prevent slider value from using default value on redraw
+          m("input.radiusSlider",{title: "travel distance slider" ,type: "range", min: 0, max: 3, value: viewData.radius_slider_value}),//prevent slider value from using default value on redraw
         ]),
         m("div.contentContainer",[
           m("div.button.center.font_size_1_7",{onclick: () =>{viewData.initFoodSearch(viewData.search_radius)} },"Find Food")
@@ -85,7 +85,7 @@ var loading ={//screen to show while requests are loaded
     return m("loadingScreen",[
       m("viewContent",[
         m("div",[
-          m("img.fadeInAndOut", {src: "/public/logo.png", onload:()=>{$("img").show()}})
+          m("img.fadeInAndOut", {alt: "loading", src: "/public/logo.png", onload:()=>{$("img").show()}})
         ])
       ])
     ])

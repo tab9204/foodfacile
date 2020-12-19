@@ -1,4 +1,4 @@
-var cacheName = 'offlineCache-v13';
+var cacheName = 'offlineCache-v14';
 var contentToCache = [
   '/offline.html',
   '/manifest.json',

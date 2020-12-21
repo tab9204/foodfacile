@@ -85,7 +85,7 @@ var loading ={//screen to show while requests are loaded
     return m("loadingScreen",[
       m("viewContent",[
         m("div",[
-          m("img.fadeInAndOut", {alt: "loading", src: "/public/logo.png", onload:()=>{$("img").show()}})
+          m("img.fadeInAndOut", {alt: "loading", src: "/public/loading.png", onload:()=>{$("img").show()}})
         ])
       ])
     ])

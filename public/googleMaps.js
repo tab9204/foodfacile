@@ -10,6 +10,8 @@ function searchForNearbyFood(location,radius){
       location: location,
       radius: radius,
       openNow: true,
+      minPriceLevel: 1,
+      maxPriceLevel: 4,
       type: ['restaurant']
     };
 
